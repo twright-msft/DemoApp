@@ -23,8 +23,6 @@ namespace DemoApp.Data
     {
         public static void Initialize(WindFarmContext context)
         {
-            context.Database.EnsureCreated();
-
             // Look for any windmills.
             if (!context.Windmills.Any())
             {
@@ -65,28 +63,25 @@ namespace DemoApp.Data
 
         public static void Initialize(BookStoreContext context)
         {
-            if (context.Database.EnsureCreated())
+            // Look for any books.
+            if (!context.Books.Any())
             {
-                // Look for any books.
-                if (!context.Books.Any())
+                // DB has been not been seeded, so let's seed some data into the table
+                var books = new Book[]
                 {
-                    // DB has been not been seeded, so let's seed some data into the table
-                    var books = new Book[]
-                    {
-                        new Book{Title="Azure Arc-enabled Data Services",Genre="Technology",Price=Decimal.Parse("35.52"),ReleaseDate=DateTime.Parse("2021-12-14")},
-                        new Book{Title="Implementing Hybrid Cloud with Azure Arc: Explore the new-generation hybrid cloud and learn how to build Azure Arc-enabled solutions",Genre="Technology",Price=Decimal.Parse("44.99"),ReleaseDate=DateTime.Parse("2021-07-21")},
-                        new Book{Title="Azure Arc-enabled Data Services Revealed",Genre="Technology",Price=Decimal.Parse("39.99"),ReleaseDate=DateTime.Parse("2021-02-03")},
-                        new Book{Title="Azure Arc-enabled Kubernetes for Multicloud",Genre="Technology",ReleaseDate=DateTime.Parse("2021-02-01")}
-                    };
+                    new Book{Title="Azure Arc-enabled Data Services",Genre="Technology",Price=Decimal.Parse("35.52"),ReleaseDate=DateTime.Parse("2021-12-14")},
+                    new Book{Title="Implementing Hybrid Cloud with Azure Arc: Explore the new-generation hybrid cloud and learn how to build Azure Arc-enabled solutions",Genre="Technology",Price=Decimal.Parse("44.99"),ReleaseDate=DateTime.Parse("2021-07-21")},
+                    new Book{Title="Azure Arc-enabled Data Services Revealed",Genre="Technology",Price=Decimal.Parse("39.99"),ReleaseDate=DateTime.Parse("2021-02-03")},
+                    new Book{Title="Azure Arc-enabled Kubernetes for Multicloud",Genre="Technology",ReleaseDate=DateTime.Parse("2021-02-01")}
+                };
 
-                    foreach (Book w in books)
-                    {
-                        context.Books.Add(w);
-                    }
+                foreach (Book w in books)
+                {
+                    context.Books.Add(w);
                 }
-
-                context.SaveChanges();
             }
+
+            context.SaveChanges();
         }
 
         /* DEMO_CUSTOMIZATION: Add additional Intialize method overloads here for additional DbContexts as needed
@@ -123,28 +118,25 @@ namespace DemoApp.Data
 
         public static void Initialize(MiningOperationsContext context)
         {
-            if (context.Database.EnsureCreated())
+            // Look for any mining carts.
+            if (!context.MiningCarts.Any())
             {
-                // Look for any books.
-                if (!context.MiningCarts.Any())
+                // DB has been not been seeded
+                var miningcarts = new MiningCart[]
                 {
-                    // DB has been not been seeded
-                    var miningcarts = new MiningCart[]
-                    {
-                        new MiningCart{CartId="3",Type="Loader"},
-                        new MiningCart{CartId="4",Type="Loader"},
-                        new MiningCart{CartId="5",Type="Personnel"},
-                        new MiningCart{CartId="6",Type="Carrier"}
-                    };
+                    new MiningCart{CartId="3",Type="Loader"},
+                    new MiningCart{CartId="4",Type="Loader"},
+                    new MiningCart{CartId="5",Type="Personnel"},
+                    new MiningCart{CartId="6",Type="Carrier"}
+                };
 
-                    foreach (MiningCart w in miningcarts)
-                    {
-                        context.MiningCarts.Add(w);
-                    }
+                foreach (MiningCart w in miningcarts)
+                {
+                    context.MiningCarts.Add(w);
                 }
-
-                context.SaveChanges();
             }
+
+            context.SaveChanges();
         }
         */
     }

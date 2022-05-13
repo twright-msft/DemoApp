@@ -26,8 +26,7 @@ namespace DemoApp
                 try
                 {
                     var context = services.GetRequiredService<BookStoreContext>();
-                    //Retry connecting to the database instance in case it is not available at the time the app is provisioned
-                    Retry.Do(() => context.Database.EnsureCreated(), TimeSpan.FromSeconds(3), 120);
+                    context.Database.EnsureCreated();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
